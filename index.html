@@ -1780,7 +1780,7 @@ $('#navList').addEventListener('click', e => {
 });
 $('#navStart').addEventListener('click', () => closeNav(() => openModal()));
 // request modal
-const CONTACT_EMAIL = ['malikabdullah1786', 'gmail.com'].join('@');   // where project requests go (assembled here so address-harvesting bots don't find it in the page)
+const CONTACT_EMAIL = import.meta.env?.VITE_CONTACT_EMAIL || ['malikabdullah1786', 'gmail.com'].join('@');   // where project requests go (assembled here so address-harvesting bots don't find it in the page)
 document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + CONTACT_EMAIL; a.textContent = CONTACT_EMAIL; });
 const modal = $('#modal'), form = $('#reqForm');
 let lastFocus = null;
@@ -1906,7 +1906,8 @@ form.addEventListener('submit', e => {
   };
 
   // Direct SMTP mail relay to malikabdullah1786@gmail.com
-  fetch('https://formsubmit.co/ajax/malikabdullah1786@gmail.com', {
+  const formEndpoint = import.meta.env?.VITE_FORM_ENDPOINT || `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+  fetch(formEndpoint, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({
