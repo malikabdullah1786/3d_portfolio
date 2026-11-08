@@ -892,7 +892,11 @@ body{margin:0}
   font:inherit;font-size:1rem;font-weight:500;cursor:pointer;transition:background .25s}
 .sf__ghost:hover{background:rgba(var(--sf-rgb),.07)}
 .sf__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.25rem 1.5rem;margin-top:5rem;padding-top:2.5rem;border-top:1px solid rgba(var(--sf-rgb),.12)}
-@media (min-width:768px){.sf__cols{grid-template-columns:2fr 1fr 1fr}}
+@media (min-width:768px){.sf__cols{grid-template-columns:2fr 1fr 1.2fr 1fr}}
+.mdirect-links{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 1.25rem}
+.mdirect-item{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .8rem;border-radius:9999px;background:var(--surface);border:1px solid var(--line);font-size:.8rem;font-weight:500;color:var(--foreground);text-decoration:none;transition:background .2s,border-color .2s,color .2s}
+.mdirect-item:hover{background:var(--surface-2);border-color:rgba(var(--fg-rgb),.3);color:var(--foreground)}
+.mdirect-item svg{width:.85rem;height:.85rem;opacity:.8;flex-shrink:0}
 .sf__cols h3{margin-bottom:1rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--sf-rgb),.66)}
 .sf__cols ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
 @media (pointer:coarse),(max-width:767.98px){.sf__cols ul{gap:0}.sf__cols button,.sf__cols a,.sf__bot button{min-height:44px;min-width:44px;display:inline-flex;align-items:center}.sf__cols li.st{min-height:32px;display:flex;align-items:center}}
@@ -1308,6 +1312,11 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
     <div class="sf__cols">
       <div><h3>Work</h3><ul class="work"><li><a href="web-developer/" data-door="0">Full Stack &amp; SaaS</a></li><li><a href="app-developer/" data-door="1">Mobile Apps</a></li><li><a href="ui-ux-designer/" data-door="2">DevOps &amp; Cloud</a></li><li><a href="cpp-systems/" data-door="3">C++ Systems</a></li><li><a href="graphic-designer/" data-door="4">Graphic Design</a></li><li><a href="photographer/" data-door="5">Certificate &amp; Cybersecurity</a></li></ul></div>
       <div><h3>Navigate</h3><ul><li><a href="./" data-go="home">Home</a></li><li><a href="./#about" data-go="about">My story</a></li><li><button data-contact>Contact</button></li></ul></div>
+      <div><h3>Connect</h3><ul>
+        <li><a href="mailto:malikabdullah1786@gmail.com" target="_blank" rel="noopener noreferrer">malikabdullah1786@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/malikabdullah1786" target="_blank" rel="noopener noreferrer">LinkedIn · malikabdullah1786</a></li>
+        <li><a href="https://github.com/malikabdullah1786" target="_blank" rel="noopener noreferrer">GitHub · malikabdullah1786</a></li>
+      </ul></div>
       <div><h3>Status</h3><ul><li class="st">Available for work</li><li class="st">Remote-first, worldwide</li></ul></div>
     </div>
     <div class="sf__bot"><span>© <span data-fyear>2026</span> Muhammad Abdullah. Designed and built with pride.</span><span class="sf__legal"><a href="legal/" target="_top">Privacy &amp; credits</a></span><button data-go="home">Back to top ↑</button></div>
@@ -1435,7 +1444,22 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
   <div class="modal__panel" id="mPanel">
     <button class="x-btn" id="mClose" aria-label="Close"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></svg></button>
     <div id="mForm">
-      <div class="mhead"><p>Hire me</p><h2 id="mTitle">Tell me what you need built.</h2><small class="qz__min">Five quick questions. Projects start at <b id="qzMin">$500</b>.</small></div>
+      <div class="mhead"><p>Contact &amp; Hire</p><h2 id="mTitle">Let's build something great.</h2><small class="qz__min">Fill out the quick query form below, or reach out directly:</small>
+        <div class="mdirect-links" aria-label="Direct contact links">
+          <a href="mailto:malikabdullah1786@gmail.com" class="mdirect-item" title="Send direct email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>malikabdullah1786@gmail.com</span>
+          </a>
+          <a href="https://linkedin.com/in/malikabdullah1786" target="_blank" rel="noopener noreferrer" class="mdirect-item" title="LinkedIn Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn · malikabdullah1786</span>
+          </a>
+          <a href="https://github.com/malikabdullah1786" target="_blank" rel="noopener noreferrer" class="mdirect-item" title="GitHub Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            <span>GitHub · malikabdullah1786</span>
+          </a>
+        </div>
+      </div>
       <!-- a short questionnaire: paid projects only, with a minimum budget; anything else is turned away kindly before it is sent -->
       <form class="mform" id="reqForm" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
         <input type="hidden" name="form-name" value="contact">
@@ -1452,7 +1476,7 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
           <label class="qc"><input type="radio" name="service" value="DevOps &amp; Cloud Architecture"><span>DevOps &amp; Cloud Architecture</span></label>
           <label class="qc"><input type="radio" name="service" value="C++ / High Performance System"><span>C++ / High Performance System</span></label>
           <label class="qc"><input type="radio" name="service" value="Full-Stack / AI Agent Platform"><span>Full-Stack / AI Agent Platform</span></label>
-          <label class="qc qc--q"><input type="radio" name="service" value="question"><span>I have a question about this website</span></label>
+          <label class="qc qc--q"><input type="radio" name="service" value="General Inquiry or Question"><span>General Inquiry or Question</span></label>
         </fieldset>
 
         <fieldset class="qz" data-step="2" hidden>
@@ -1724,8 +1748,11 @@ function qzCheck(){
   const d = new FormData(form);
   if (step === 1){
     if (!d.get('service')) return $('#qzErr').textContent = 'Pick the option closest to what you need.', false;
-    if (d.get('service') === 'question'){ qzStop('This form is for hiring me',
-      'I keep it for paid client projects, so I can’t answer questions about how this site was made or general advice here. Thanks for stopping by, and for the interest in the work.', 1); return false; }
+    if (d.get('service') === 'General Inquiry or Question'){
+      // Jump directly to contact details step for general queries
+      qzGo(5, true);
+      return false;
+    }
   }
   if (step === 2){
     if (!d.get('budget')) return $('#qzErr').textContent = 'Choose a budget range.', false;
@@ -1781,8 +1808,8 @@ form.addEventListener('submit', e => {
     $('#mForm').hidden = true; $('#mSuccess').hidden = false; $('#mDone').focus();
   };
 
-  // Direct backend dispatch to Formspree endpoint configured for malikabdullah1786@gmail.com
-  fetch('https://formspree.io/f/mqkvrvzw', {
+  // Direct SMTP mail relay to malikabdullah1786@gmail.com
+  fetch('https://formsubmit.co/ajax/malikabdullah1786@gmail.com', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -1790,18 +1817,23 @@ form.addEventListener('submit', e => {
       email: mail,
       phone: phone,
       service: g('service'),
-      budget: budget,
-      timeline: g('timeline'),
-      client_type: g('client_type'),
-      company: g('website'),
+      budget: budget || 'General Query',
+      timeline: g('timeline') || 'Flexible',
+      client_type: g('client_type') || 'Direct Message',
+      company: g('website') || 'N/A',
       message: proj,
-      _subject: subject
+      _subject: subject,
+      _captcha: 'false',
+      _template: 'table'
     })
   })
   .then(r => {
     if (!r.ok) throw new Error(r.status);
+    return r.json();
+  })
+  .then(() => {
     $('#mOkT').textContent = 'Message sent successfully';
-    $('#mOkP').textContent = `Thanks, ${name}! Your project inquiry has been delivered directly to malikabdullah1786@gmail.com. I will reply within 12 hours.`;
+    $('#mOkP').textContent = `Thanks, ${name}! Your message has been delivered via SMTP to malikabdullah1786@gmail.com. I will reply shortly.`;
     $('.msuccess__alt').hidden = true;
     $('#mForm').hidden = true; $('#mSuccess').hidden = false; $('#mDone').focus();
   })
@@ -1810,7 +1842,7 @@ form.addEventListener('submit', e => {
   })
   .finally(() => {
     btn.disabled = false;
-    $('#mSendLbl').textContent = 'Send enquiry';
+    $('#mSendLbl').textContent = 'Send message';
   });
 });
 // routing for in-page buttons
