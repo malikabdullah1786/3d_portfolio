@@ -1008,6 +1008,98 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
   </div>
 </div>
 
+<script>
+// Standalone, self-contained PageLoader: starts immediately on render, never blocked by scripts or network
+(function(){
+  var loader = document.getElementById('loader');
+  if (!loader) return;
+
+  var hash = location.hash;
+  if (hash === '#works' || hash === '#about' || hash === '#contact') {
+    try { loader.remove(); } catch(e){}
+    document.body.classList.add('ready');
+    window.__introReady = true;
+    requestAnimationFrame(function(){
+      window.dispatchEvent(new Event('intro:ready'));
+    });
+    return;
+  }
+
+  document.documentElement.style.overflow = 'hidden';
+  var num = document.getElementById('ldCount');
+  var pills = Array.prototype.slice.call(loader.querySelectorAll('.ld__pill'));
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ready = 0.6;
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function(){ ready = Math.max(ready, 0.88); });
+  }
+  var markLoaded = function(){ ready = 1; };
+  if (document.readyState === 'complete') markLoaded();
+  else window.addEventListener('load', markLoaded, { once: true });
+  setTimeout(markLoaded, 2500);
+
+  var ease = function(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  var paint = function(p){
+    loader.style.setProperty('--p', p.toFixed(3));
+    for (var k = 0; k < pills.length; k++){
+      if (p >= k / 6 + 0.02 || p >= 1) pills[k].classList.add('on');
+      else pills[k].classList.remove('on');
+    }
+  };
+
+  var introDone = false;
+  var finish = function(){
+    if (introDone) return;
+    introDone = true;
+    loader.classList.add('out');
+    document.documentElement.style.removeProperty('overflow');
+    setTimeout(function(){
+      document.body.classList.add('ready');
+      window.__introReady = true;
+      window.dispatchEvent(new Event('intro:ready'));
+    }, 260);
+    setTimeout(function(){
+      try { loader.remove(); } catch(e){}
+    }, 950);
+  };
+  window.__introBail = finish;
+  setTimeout(finish, 4000); // 4s absolute fail-safe
+
+  if (reduced) {
+    if (num) num.textContent = '100';
+    paint(1);
+    setTimeout(finish, 200);
+    return;
+  }
+
+  var DURATION = 1400;
+  var t0 = null;
+  var shown = 0;
+
+  function tick(now){
+    if (introDone) return;
+    if (t0 === null) t0 = now;
+    var progress = Math.min(1, (now - t0) / DURATION);
+    var want = Math.min(ease(progress), ready);
+    shown += (want - shown) * 0.22;
+    if (want - shown < 0.002) shown = want;
+    paint(shown);
+    if (num) num.textContent = String(Math.min(100, Math.round(shown * 100))).padStart(3, '0');
+
+    if (shown < 0.998 && progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      paint(1);
+      if (num) num.textContent = '100';
+      setTimeout(finish, 350);
+    }
+  }
+
+  requestAnimationFrame(tick);
+})();
+</script>
+
 <!-- ============ Header ============ -->
 <header class="hdr rv">
   <div class="shell hdr__in">
@@ -1444,7 +1536,7 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
   <div class="modal__panel" id="mPanel">
     <button class="x-btn" id="mClose" aria-label="Close"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></svg></button>
     <div id="mForm">
-      <div class="mhead"><p>Contact &amp; Hire</p><h2 id="mTitle">Let's build something great.</h2><small class="qz__min">Fill out the quick query form below, or reach out directly:</small>
+      <div class="mhead"><p>Contact &amp; Hire</p><h2 id="mTitle">Let's build something great.</h2><small class="qz__min">Projects start at <b id="qzMin">Rs 30,000</b>. Reach out directly or fill the query below:</small>
         <div class="mdirect-links" aria-label="Direct contact links">
           <a href="mailto:malikabdullah1786@gmail.com" class="mdirect-item" title="Send direct email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -1515,17 +1607,17 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
           <legend tabindex="-1">Last step: how do I reach you?</legend>
           <label for="f-name"><span>Name</span><input id="f-name" name="name" type="text" required maxlength="80" placeholder="Your name" autocomplete="name"></label>
           <label for="f-email"><span>Work email</span><input id="f-email" name="email" type="email" required maxlength="120" placeholder="you@company.com" autocomplete="email"></label>
-          <label for="f-phone"><span>Phone</span><input id="f-phone" name="phone" type="tel" required maxlength="20" minlength="7" pattern="[\d\s\-\+\(\)]{7,20}" placeholder="+1 555 123 4567" autocomplete="tel" title="Phone number with country code"></label>
-          <label for="f-site"><span>Company or website <em>(optional)</em></span><input id="f-site" name="website" type="text" maxlength="160" placeholder="northwind.studio" autocomplete="organization"></label>
-          <label for="f-project"><span>About the project</span><textarea id="f-project" name="project" rows="4" required minlength="40" maxlength="1500" placeholder="What are you building, and what should it achieve? Links help."></textarea></label>
+          <label for="f-phone"><span>Phone <em>(optional)</em></span><input id="f-phone" name="phone" type="tel" maxlength="20" placeholder="+92 300 1234567" autocomplete="tel" title="Phone number with country code"></label>
+          <label for="f-site"><span>Company or website <em>(optional)</em></span><input id="f-site" name="website" type="text" maxlength="160" placeholder="company.com" autocomplete="organization"></label>
+          <label for="f-project"><span>Your message or project scope</span><textarea id="f-project" name="project" rows="4" required minlength="10" maxlength="1500" placeholder="What are you building, or what would you like to discuss? Details and links welcome."></textarea></label>
         </fieldset>
 
         <p class="qz__err" id="qzErr" role="alert"></p>
         <div class="mform__bot">
           <button type="button" class="qz__back" id="mBack" hidden>Back</button>
-          <small id="mReply">I reply within one business day.</small>
+          <small id="mReply">I reply within 12 hours.</small>
           <button type="submit" class="pill pill--dark pill--arrow" id="mSend">
-            <span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill"><span id="mSendLbl">Write the email</span>
+            <span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill"><span id="mSendLbl">Send message</span>
               <span class="pill__badge"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-h="x 0 2|y 0 -2" data-hs="320 18" data-ht=".pill"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
             </span>
           </button>
@@ -1725,9 +1817,11 @@ const qzSteps = [...form.querySelectorAll('.qz')];
 const qzFocus = () => { const s = qzSteps[step - 1]; (s.querySelector('.qc input:checked') || s.querySelector('.qc input') || s.querySelector('input'))?.focus({ preventScroll: true }); };
 function setCur(c){
   const b = BUDGETS[c] || BUDGETS.USD;
-  form.querySelector(`input[name=currency][value=${c}]`).checked = true;
+  const curInput = form.querySelector(`input[name=currency][value=${c}]`);
+  if (curInput) curInput.checked = true;
   form.querySelectorAll('[data-b]').forEach(s => { s.textContent = b[+s.dataset.b + 1]; });
-  $('#qzMin').textContent = b[0];
+  const qMin = $('#qzMin');
+  if (qMin) qMin.textContent = b[0];
 }
 function qzGo(n, focus){
   step = n; $('#qzErr').textContent = '';
@@ -2800,7 +2894,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   addEventListener('pageshow', e => {
     if (!busy && !e.persisted) return;
     cancelAnimationFrame(walkRaf); dark.hidden = true; shade.hidden = true;
-    sec.classList.remove('through'); sec.style.transform = ''; sec.style.transformOrigin = ''; reveal(false);
+    sec.classList.remove('through'); sec.style.transform = ''; sec.style.transformOrigin = '';
     veil.classList.remove('on'); veil.hidden = true; veil.style.clipPath = ''; veil.innerHTML = '';
     wallv.classList.remove('on','live'); wallv.style.clipPath = '';
     $('#cord')?.classList.remove('away'); $('.hdr')?.classList.remove('away');
@@ -2809,60 +2903,21 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   });
 })();
 
-/* ---------- PageLoader: the doors' colours stack up as the page loads, then slides apart to open it ---------- */
+/* ---------- PageLoader coordination ---------- */
 const loader = $('#loader');
-// back from a door's page (#works): skip the intro and stand in front of the doors again
-// (#about and #contact come from the links in a room's navbar and footer)
-if (['#works', '#about', '#contact'].includes(location.hash)){
-  loader.remove();
-  document.body.classList.add('ready');
-  const wantContact = location.hash === '#contact';
-  requestAnimationFrame(() => {
-    if (wantContact) setTimeout(() => openModal(), 400);
-    const el = $(location.hash === '#about' ? '#about' : '#works');
-    if (el) window.scrollTo(0, el.getBoundingClientRect().top + pageYOffset);
-    dispatchEvent(new Event('intro:ready'));
-  });
+if (!loader || document.body.classList.contains('ready') || window.__introReady){
+  startScroll();
+  if (['#works', '#about', '#contact'].includes(location.hash)){
+    const wantContact = location.hash === '#contact';
+    requestAnimationFrame(() => {
+      if (wantContact) setTimeout(() => openModal(), 400);
+      const el = $(location.hash === '#about' ? '#about' : '#works');
+      if (el) window.scrollTo(0, el.getBoundingClientRect().top + pageYOffset);
+    });
+  }
 } else {
-  stopScroll();
-  // whatever happens in the intro, the site always opens: any error, or an intro that hasn't finished in 9 s, lets you straight in
-  let introDone = false;
-  const bailOut = () => {
-    if (introDone) return; introDone = true;
-    try { loader.remove(); } catch (e) {}
-    document.body.classList.add('ready'); startScroll(); dispatchEvent(new Event('intro:ready'));
-  };
-  window.__introBail = bailOut;
-  setTimeout(bailOut, 9000);
-  try {
-  const num = $('#ldCount'), pills = [...loader.querySelectorAll('.ld__pill')];
-  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  // real progress: fonts first, then the page's images; the counter never runs ahead of what has actually loaded
-  let ready = .55;
-  document.fonts?.ready.then(() => { ready = Math.max(ready, .85); });
-  const loaded = () => { ready = 1; };
-  if (document.readyState === 'complete') loaded(); else addEventListener('load', loaded, { once: true });
-  setTimeout(loaded, 5000);                               // never keep anyone waiting long
-  // one colour joins the stack for each sixth of the way
-  const paint = p => { loader.style.setProperty('--p', p.toFixed(3)); pills.forEach((el, k) => el.classList.toggle('on', p >= k / 6 + .02 || p >= 1)); };
-  const FILL = 1600;
-  let t0 = null, shown = 0;
-  function loadTick(now){
-    if (t0 === null) t0 = now;
-    const want = Math.min(ease(Math.min(1, (now - t0) / FILL)), ready);
-    shown += (want - shown) * .18; if (want - shown < .002) shown = want;
-    paint(shown);
-    num.textContent = String(Math.round(shown * 100)).padStart(3, '0');
-    if (shown < 1) requestAnimationFrame(t => { try { loadTick(t); } catch (e) { bailOut(); } }); else setTimeout(finish, 520);   // the last colour lands, then it opens
-  }
-  function finish(){
-    loader.classList.add('out');                             // the colours slide away and the curtain lifts
-    setTimeout(() => document.body.classList.add('ready'), 260);   // the hero plays its entrance as it is uncovered
-    setTimeout(bailOut, 1250);
-  }
-  if (reduced){ num.textContent = '100'; paint(1); setTimeout(finish, 500); }
-  else requestAnimationFrame(t => { try { loadTick(t); } catch (e) { bailOut(); } });
-  } catch (e) { bailOut(); }
+  // Intro animation is ticking smoothly via the early standalone loader script
+  addEventListener('intro:ready', () => { startScroll(); }, { once: true });
 }
 
 /* ---------- Clean routes: the address bar reads /home, /work or /my-story as you move through the page ---------- */
