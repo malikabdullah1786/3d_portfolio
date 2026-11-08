@@ -1,13 +1,11 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useRef, type MouseEvent, type ReactNode } from 'react';
+import { useRef, type MouseEvent, type ReactNode, type ButtonHTMLAttributes } from 'react';
 
-interface MagneticButtonProps {
+interface MagneticButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style' | 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart'> {
     children: ReactNode;
-    className?: string;
-    onClick?: () => void;
 }
 
-export default function MagneticButton({ children, className = '', onClick }: MagneticButtonProps) {
+export default function MagneticButton({ children, className = '', onClick, ...props }: MagneticButtonProps) {
     const ref = useRef<HTMLButtonElement>(null);
 
     const x = useMotionValue(0);
@@ -46,6 +44,7 @@ export default function MagneticButton({ children, className = '', onClick }: Ma
             className={className}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            {...props}
         >
             {children}
         </motion.button>

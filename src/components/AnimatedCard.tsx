@@ -7,7 +7,7 @@ interface AnimatedCardProps {
     glowColor?: string;
 }
 
-export default function AnimatedCard({ children, className = '', glowColor = '99, 102, 241' }: AnimatedCardProps) {
+export default function AnimatedCard({ children, className = '', glowColor = '252, 213, 53' }: AnimatedCardProps) {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 

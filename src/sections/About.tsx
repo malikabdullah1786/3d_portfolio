@@ -9,23 +9,23 @@ export default function About() {
         offset: ['start end', 'end start']
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+    const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
     const stats = [
-        { icon: Code2, value: '450+', label: 'n8n Workflows', color: '#6366f1' },
-        { icon: Trophy, value: '26+', label: 'Certifications', color: '#f59e0b' },
-        { icon: Users, value: '5+', label: 'Leadership Roles', color: '#10b981' },
+        { icon: Code2, value: '250+', label: 'n8n Workflows' },
+        { icon: Trophy, value: '26+', label: 'Certifications' },
+        { icon: Users, value: '4+', label: 'Leadership Roles' },
     ];
 
     const paragraphs = [
-        "I am a Software Engineering student at FAST-NUCES Lahore dedicated to building high-performance, scalable software solutions. From low-level system optimization in C++ to high-level application architecture, I thrive on solving complex engineering challenges.",
-        "As the Founder & CEO of Ride Share APK, I've built a ride-sharing platform from scratch that empowers students and daily commuters. This journey taught me to see problems as opportunities and code as a tool for change.",
-        "Beyond engineering, I am deeply involved in the university ecosystem. As a GDSC Lead, SOFTEC Deputy, and Media & PR Officer, I bridge the gap between technical innovation and community building."
+        "I am a junior Software Engineering student (5th Semester) at FAST-NUCES Lahore, specializing in system architectures, automation engineering, and custom software solutions. I combine rigorous academic training in object-oriented systems and data structures with hands-on professional experiences.",
+        "Currently, as a Full Stack and DevOps Intern at Zenolve, I work on high-impact systems, contributing to a prominent UK property platform, building custom containerized integrations, and managing self-hosted automation infrastructure. I also founded Tarzify, where I engineered automated order workflows and optimized SEO funnels.",
+        "On campus, I actively shape the student tech community. I serve as the Deputy Head of Software for SOFTEC, organizing technical tracks and managing IT deployments, alongside leadership roles in the Google Developer Student Club (GDSC) and the student Media & PR office."
     ];
 
     return (
-        <section id="about" ref={sectionRef} className="section py-24 relative">
-            <div className="container">
+        <section id="about" ref={sectionRef} className="section py-24 relative font-sans">
+            <div className="page-wrapper">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -34,11 +34,11 @@ export default function About() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <span className="text-[var(--color-accent-primary)] font-medium mb-2 block">
+                    <span className="font-sans uppercase tracking-widest text-xs font-semibold text-[var(--color-accent-text)] mb-2 block">
                         About Me
                     </span>
-                    <h2 className="section-title">
-                        The <span className="gradient-text">Founder-Engineer</span>
+                    <h2 className="section-title text-[var(--color-text-primary)]">
+                        The Founder-Engineer
                     </h2>
                 </motion.div>
 
@@ -52,7 +52,7 @@ export default function About() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                                className="text-lg text-[var(--color-text-secondary)] leading-relaxed"
+                                className="text-lg text-[var(--color-text-secondary)] leading-relaxed font-sans"
                             >
                                 {paragraph}
                             </motion.p>
@@ -64,9 +64,9 @@ export default function About() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.6 }}
-                            className="glass p-4 rounded-xl mt-8"
+                            className="card p-4 rounded-xl mt-8 border-l-4 border-[var(--color-accent-text)] bg-[var(--color-bg-card)] font-sans"
                         >
-                            <p className="text-[var(--color-accent-tertiary)] font-semibold">
+                            <p className="text-[var(--color-text-primary)] font-medium">
                                 🏆 APM '26 Runner-up (All Pakistan Mathematics Olympiad - Scavenger Hunt)
                             </p>
                         </motion.div>
@@ -81,26 +81,17 @@ export default function About() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                                className="card flex items-center gap-6 group"
+                                className="card bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:border-[var(--color-accent-primary)]/45 flex items-center gap-6 group"
                                 whileHover={{ x: 10 }}
                             >
-                                <div
-                                    className="w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                                    style={{
-                                        background: `linear-gradient(135deg, ${stat.color}20, ${stat.color}40)`,
-                                        border: `1px solid ${stat.color}50`
-                                    }}
-                                >
-                                    <stat.icon size={28} style={{ color: stat.color }} />
+                                <div className="w-14 h-14 rounded-lg flex items-center justify-center bg-[var(--color-bg-secondary)] border border-[var(--color-border)] group-hover:border-[var(--color-accent-text)] transition-all duration-300">
+                                    <stat.icon size={26} className="text-[var(--color-accent-text)]" />
                                 </div>
                                 <div>
-                                    <motion.span
-                                        className="text-4xl font-bold block"
-                                        style={{ color: stat.color }}
-                                    >
+                                    <span className="text-3xl font-medium font-display text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-text)] transition-colors block">
                                         {stat.value}
-                                    </motion.span>
-                                    <span className="text-[var(--color-text-secondary)]">
+                                    </span>
+                                    <span className="text-[var(--color-text-secondary)] text-sm font-medium font-sans">
                                         {stat.label}
                                     </span>
                                 </div>
@@ -117,8 +108,8 @@ export default function About() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="mt-20 text-center max-w-3xl mx-auto"
                 >
-                    <blockquote className="text-2xl md:text-3xl font-light italic text-[var(--color-text-secondary)]">
-                        "I am passionate about creating tech that moves the world—whether it's a ride-share app or a high-speed C++ backend."
+                    <blockquote className="text-xl md:text-2xl font-light italic font-display text-[var(--color-text-secondary)]">
+                        "I focus on writing readable, high-performance code and designing resilient system architectures that solve real operational bottlenecks."
                     </blockquote>
                 </motion.div>
             </div>

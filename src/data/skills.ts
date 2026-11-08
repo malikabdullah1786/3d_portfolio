@@ -4,11 +4,10 @@ import {
     Server,
     Database,
     Container,
-    Cloud,
     Shield,
-    Palette,
     Wrench,
-    BookOpen,
+    Brain,
+    Users,
     type LucideIcon
 } from 'lucide-react';
 
@@ -32,70 +31,73 @@ export const skillCategories: SkillCategory[] = [
         color: '#6366f1',
         skills: [
             { name: 'C++', level: 'expert' },
-            { name: 'Python', level: 'advanced' },
             { name: 'JavaScript', level: 'advanced' },
             { name: 'TypeScript', level: 'advanced' },
+            { name: 'Python', level: 'advanced' },
+            { name: 'Java', level: 'advanced' },
             { name: 'PHP', level: 'intermediate' },
             { name: 'Dart', level: 'intermediate' },
             { name: 'SQL', level: 'advanced' },
         ]
     },
     {
-        name: 'Frontend',
-        icon: Smartphone,
-        color: '#06b6d4',
-        skills: [
-            { name: 'React', level: 'advanced' },
-            { name: 'Next.js', level: 'advanced' },
-            { name: 'Flutter', level: 'intermediate' },
-            { name: 'Tailwind CSS', level: 'advanced' },
-            { name: 'HTML5', level: 'expert' },
-            { name: 'CSS3', level: 'expert' },
-        ]
-    },
-    {
-        name: 'Backend',
+        name: 'Web Development',
         icon: Server,
         color: '#10b981',
         skills: [
-            { name: 'Node.js', level: 'advanced' },
-            { name: 'FastAPI', level: 'advanced' },
-            { name: 'Express.js', level: 'advanced' },
+            { name: 'React.js', level: 'advanced' },
+            { name: 'Next.js', level: 'advanced' },
+            { name: 'MERN/PERN Stack', level: 'advanced' },
+            { name: 'HTML5', level: 'expert' },
+            { name: 'CSS3', level: 'expert' },
+            { name: 'Tailwind CSS', level: 'advanced' },
         ]
     },
     {
-        name: 'Databases',
-        icon: Database,
-        color: '#f59e0b',
+        name: 'App Development',
+        icon: Smartphone,
+        color: '#06b6d4',
         skills: [
-            { name: 'MongoDB', level: 'advanced' },
-            { name: 'Supabase', level: 'advanced' },
-            { name: 'SQL Server', level: 'intermediate' },
-            { name: 'Firebase', level: 'advanced' },
+            { name: 'Flutter (.dart)', level: 'advanced' },
+            { name: 'Restful APIs', level: 'advanced' },
+            { name: 'Ride-Sharing architecture', level: 'advanced' },
         ]
     },
     {
-        name: 'DevOps & Automation',
+        name: 'Automation & DevOps',
         icon: Container,
         color: '#8b5cf6',
         skills: [
-            { name: 'Docker', level: 'advanced' },
-            { name: 'n8n', level: 'expert' },
-            { name: 'Git', level: 'advanced' },
-            { name: 'GitHub', level: 'advanced' },
-            { name: 'Render', level: 'intermediate' },
-            { name: 'Vercel', level: 'intermediate' },
+            { name: 'n8n (Workflow Automation)', level: 'expert' },
+            { name: 'Docker (Containerization)', level: 'advanced' },
+            { name: 'Microsoft Azure', level: 'advanced' },
+            { name: 'Azure DevOps', level: 'advanced' },
+            { name: 'CI/CD Pipelines', level: 'advanced' },
+            { name: 'Git & GitHub', level: 'expert' },
         ]
     },
     {
-        name: 'Cloud & APIs',
-        icon: Cloud,
+        name: 'AI & LLM Engineering',
+        icon: Brain,
         color: '#ec4899',
         skills: [
-            { name: 'Firebase Auth', level: 'advanced' },
-            { name: 'Google Maps SDK', level: 'advanced' },
-            { name: 'Twilio', level: 'advanced' },
-            { name: 'Google Cloud', level: 'intermediate' },
+            { name: 'Prompt Engineering', level: 'expert' },
+            { name: 'Gemini API', level: 'expert' },
+            { name: 'DeepSeek API', level: 'expert' },
+            { name: 'Data Validation', level: 'advanced' },
+            { name: 'RLHF Concepts', level: 'intermediate' },
+        ]
+    },
+    {
+        name: 'Databases & Cloud',
+        icon: Database,
+        color: '#f59e0b',
+        skills: [
+            { name: 'PostgreSQL', level: 'advanced' },
+            { name: 'MongoDB', level: 'advanced' },
+            { name: 'Supabase', level: 'advanced' },
+            { name: 'Azure SQL', level: 'advanced' },
+            { name: 'Firebase', level: 'advanced' },
         ]
     },
     {
@@ -103,54 +105,45 @@ export const skillCategories: SkillCategory[] = [
         icon: Shield,
         color: '#ef4444',
         skills: [
+            { name: 'Ethical Hacking', level: 'advanced' },
             { name: 'Kali Linux', level: 'advanced' },
-            { name: 'Metasploit', level: 'intermediate' },
-            { name: 'Gobuster', level: 'intermediate' },
-            { name: 'Burp Suite', level: 'intermediate' },
-            { name: 'Wireshark', level: 'intermediate' },
-            { name: 'Nmap', level: 'intermediate' },
+            { name: 'Network Architecture', level: 'advanced' },
+            { name: 'Security Principles', level: 'advanced' },
         ]
     },
     {
-        name: 'Design & UI',
-        icon: Palette,
+        name: 'Professional Skills',
+        icon: Users,
         color: '#14b8a6',
         skills: [
-            { name: 'Figma', level: 'intermediate' },
-            { name: 'Lucide Icons', level: 'advanced' },
-            { name: 'Framer Motion', level: 'intermediate' },
+            { name: 'Leadership', level: 'expert' },
+            { name: 'Project Management', level: 'advanced' },
+            { name: 'Public Relations', level: 'advanced' },
+            { name: 'Communication', level: 'expert' },
+            { name: 'Analytical Problem Solving', level: 'expert' },
+            { name: 'Event Management', level: 'advanced' },
         ]
     },
     {
-        name: 'IDE & Tools',
+        name: 'Tools & IDEs',
         icon: Wrench,
         color: '#64748b',
         skills: [
+            { name: 'Qt Framework', level: 'advanced' },
             { name: 'VS Code', level: 'expert' },
-            { name: 'Android Studio', level: 'intermediate' },
             { name: 'Postman', level: 'advanced' },
-            { name: 'Chrome DevTools', level: 'advanced' },
-        ]
-    },
-    {
-        name: 'Learning Platforms',
-        icon: BookOpen,
-        color: '#0ea5e9',
-        skills: [
-            { name: 'Coursera', level: 'expert' },
-            { name: 'LinkedIn Learning', level: 'intermediate' },
+            { name: 'Docker Desktop', level: 'advanced' },
         ]
     }
 ];
 
 // All tech icons for the marquee
 export const allTechIcons = [
-    'C++', 'Python', 'JavaScript', 'TypeScript', 'PHP', 'Dart',
-    'React', 'Next.js', 'Flutter', 'Tailwind', 'HTML5', 'CSS3',
-    'Node.js', 'Express', 'FastAPI',
-    'MongoDB', 'Supabase', 'Firebase', 'SQL Server',
-    'Docker', 'Git', 'GitHub', 'n8n', 'Render', 'Vercel',
-    'Firebase Auth', 'Google Maps', 'Twilio', 'Google Cloud',
-    'Kali Linux', 'Metasploit', 'Gobuster', 'Burp Suite', 'Wireshark',
-    'Figma', 'VS Code', 'Postman'
+    'C++', 'Java', 'Python', 'JavaScript', 'TypeScript', 'PHP', 'Dart',
+    'React.js', 'Next.js', 'Flutter', 'Tailwind', 'HTML5', 'CSS3',
+    'Node.js', 'Express', 'Spring Boot', 'n8n',
+    'PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'Azure SQL',
+    'Docker', 'Git', 'GitHub', 'Microsoft Azure', 'Azure DevOps', 'CI/CD Pipelines',
+    'DeepSeek API', 'Gemini API', 'Twilio', 'RESTful APIs',
+    'Kali Linux', 'Qt Framework', 'VS Code', 'Postman'
 ];

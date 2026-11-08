@@ -1,33 +1,32 @@
-import SmoothScroll from './components/SmoothScroll';
-import ThemeToggle from './components/ThemeToggle';
-import { ThemeProvider } from './context/ThemeContext';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Skills from './sections/Skills';
-import Experience from './sections/Experience';
-import Projects from './sections/Projects';
-import Certifications from './sections/Certifications';
-import Contact from './sections/Contact';
-import './index.css';
+import { Loader } from "./components/studio/Loader";
+import { Header } from "./components/studio/Header";
+import { PullCord } from "./components/studio/PullCord";
+import { Hero } from "./components/studio/Hero";
+import { Rooms } from "./components/studio/Rooms";
+import { Story } from "./components/studio/Story";
+import { Board } from "./components/studio/Board";
+import { Toolbox } from "./components/studio/Toolbox";
+import { Contact } from "./components/studio/Contact";
+import { BackToTop, Reveals } from "./components/studio/Chrome";
+import "./studio.css";
 
 function App() {
   return (
-    <ThemeProvider>
-      <SmoothScroll>
-        <main className="bg-[var(--color-bg-primary)] min-h-screen transition-colors duration-300">
-          {/* Theme Toggle Button */}
-          <ThemeToggle />
-
-          <Hero />
-          <About />
-          <Skills />
-          <Experience />
-          <Projects />
-          <Certifications />
-          <Contact />
-        </main>
-      </SmoothScroll>
-    </ThemeProvider>
+    <>
+      <Loader />
+      <Header />
+      <PullCord />
+      <main>
+        <Hero />
+        <Rooms />
+        <Story />
+        <Board />
+        <Toolbox />
+        <Contact />
+      </main>
+      <BackToTop />
+      <Reveals />
+    </>
   );
 }
 

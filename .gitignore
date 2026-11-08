@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Backups & Raw Scraped Data
+scraped/
+src_backup_original/
+*.bak
+
+# Temporary & Scratch files
+doors_repo/
+extracted_pr/
+scratch_*
+__pycache__/
+*.pyc
+*.tmp
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
